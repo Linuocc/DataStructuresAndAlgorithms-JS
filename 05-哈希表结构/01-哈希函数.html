@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     *
+     */
+    function hashFunc(str, size) {
+        //1.定义hashCode变量
+        var hashCode = 0;
+
+        //2.霍纳算法，计算hashCode
+        for (var i = 0; i < str.length; i++) {
+            hashCode = 37 * hashCode + str.charCodeAt(i)
+        }
+
+        //3.取余操作
+        var index = hashCode % size;
+
+        return index;
+    }
+
+    //测试
+    alert(hashFunc('abc',7));
+    alert(hashFunc('nba',7));
+    alert(hashFunc('李诺川川',7));
+    alert(hashFunc('李侯川',7));
+
+
+</script>
+</body>
+</html>

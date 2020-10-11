@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //无序的，元素不能重复
+    function Set() {
+        //属性
+        this.items = {}
+
+        //方法
+        //add方法
+        Set.prototype.add = function (value) {
+            //判断是否包含这个元素
+            if (this.has(value)) {
+                return false;
+            }
+            //添加元素
+            this.items[value] = value;
+            return true;
+        }
+        //has方法
+        Set.prototype.has = function (value) {
+            return this.items.hasOwnProperty(value)
+        }
+        //remove方法
+        Set.prototype.remove = function (value) {
+            //判断是否包含这个元素
+            if (this.has(value)) {
+                return false;
+            }
+            delete this.items[value];
+            return true;
+
+
+        }
+        //clear方法
+        Set.prototype.clear = function () {
+            this.items = {}
+        }
+        //size方法
+        Set.prototype.size = function () {
+            return Object.keys(this.items).length;
+        }
+        //获取集合中所有值
+        Set.prototype.values = function () {
+            return Object.keys(this.items);
+        }
+
+
+        //集合间的操作
+        //1并集
+        Set.prototype.union = function (otherSet) {
+            //1.创建新的集合
+            var unionSet = new Set();
+            //2.将Azhong所有元素添加到新的集合
+            var values = this.values();
+            for (var i = 0; i < values.length; i++) {
+                unionSet.add(values[i]);
+            }
+
+            //3.取出B集合中的元素，判断是否需要添加到新的集合
+            values = otherSet.values();
+            for (var i = 0; i < values.length; i++) {
+                unionSet.add(values[i])
+            }
+            return unionSet;
+        }
+        //2交集
+        Set.prototype.intersection = function (otherSet) {
+            //1.创建新的集合
+            var intersection = new Set();
+
+            //2.从A中取出一个元素，判断是否同时存在于集合B中，存在就放入新的集合中
+            var values = this.values();
+            for (var i = 0; i < values.length; i++) {
+                var item = values[i];
+                if (otherSet.has(item)) {
+                    intersection.add(item);
+                }
+            }
+            return intersection;
+
+        }
+        //3差集
+        Set.prototype.difference = function (otherSet) {
+            //1.创建新的集合
+            var differenceSet = new Set();
+            //2.从A中取出元素，判断是否在B中，不存在与B中，就添加到新的集合
+            var values = this.values();
+            for (var i = 0; i < values.length; i++) {
+                var item = values[i];
+                if (!otherSet.has(item)) {
+                    differenceSet.add(item)
+                }
+            }
+
+            return differenceSet;
+        }
+        //4子集
+        Set.prototype.subset = function (otherSet) {
+            //遍历所有元素
+            var values = this.values();
+            for (var i = 0; i < values.length; i++) {
+                var item = values[i];
+                if (!otherSet.has(item)){
+                    return false;
+                }
+
+            }
+            return true;
+        }
+
+
+    }
+
+
+    // var set = new  Set();
+    //
+    // alert(set.add('123'));
+
+
+    var setA = new Set();
+    // setA.add('sdasd');
+    setA.add('1231');
+
+    var setB = new Set();
+    // setB.add('sdasd');
+    setB.add('1231');
+    setB.add('fdsfsd');
+    setB.add('gdfgd');
+    //求并集
+    // var union = setA.union(setB);
+    // alert(union.values());
+
+    //求交集
+    // var intersection = setA.intersection(setB);
+    // alert(intersection.values());
+
+    //求差集
+    // var differenceSet = setA.difference(setB);
+    // alert(differenceSet.values());
+
+    //子集
+    alert(setA.subset(setB))
+
+
+</script>
+</body>
+</html>

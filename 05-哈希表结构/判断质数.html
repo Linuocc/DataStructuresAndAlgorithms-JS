@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //判断传入的数是否是质数
+    function isPrime(num) {
+        //1.求num的平方根
+        var temp = parseInt(Math.sqrt(num));
+        for (var i = 2; i <=temp; i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    //测试
+    alert(isPrime(3));
+    alert(isPrime(11));
+    alert(isPrime(123));
+    alert(isPrime(41));
+
+</script>
+</body>
+</html>
